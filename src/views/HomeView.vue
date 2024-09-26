@@ -1,35 +1,35 @@
 <template>
-  <main class="container">
-    <h1>Welcome to The Recipes App</h1>
-    <div v-if="store.randomRecipe">
-      <RecipeCard :recipe="store.randomRecipe" />
-    </div>
-  </main>
+    <main class="container">
+        <h1>Welcome to The Recipes App</h1>
+        <div v-if="store.randomRecipe">
+            <RandomRecipe />
+        </div>
+        <div v-if="store.randomRecipe">
+            <NewRecipes :recipes="store.recipes" />
+        </div>
+    </main>
 </template>
 
 <script setup>
-import {onBeforeMount} from 'vue';
-import { useRecipesStore } from '@/stores/recipes.js';
+import { onBeforeMount } from 'vue'
+import { useRecipesStore } from '@/stores/recipes.js'
 
-import RecipeCard from '@/components/RecipeCard.vue';
+import RandomRecipe from '@/components/Home/RandomRecipe.vue'
+import NewRecipes from '@/components/Home/NewRecipes.vue'
 
-const store = useRecipesStore();
+const store = useRecipesStore()
 
 onBeforeMount(() => {
-  store.fetchRandomRecipe();
+    store.fetchRecipes()
 })
-
 </script>
 
 <style scoped>
 .container {
-  display: flex;
+    display: flex;
     height: 100vh;
     flex-direction: column;
-    align-content: center;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
 }
 </style>
